@@ -1,0 +1,40 @@
+=== Week 1: struct exploration ( Subject6 ) ===
+L = len(s.Data) = 45
+EmgVarName: ['Tibialis Anterior', 'Soleus', 'Gastrocnemius Medialis', 'Peroneus Longus', 'Rectus Femoris', 'Vastus Medialis', 'Biceps Femoris', 'Gluteus Maximus']
+AngVarName: ['PelvisFlx', 'PelvisAdd', 'PelvisRot', 'HipFlx', 'HipAdd', 'HipRot', 'KneeFlx', 'KneeAdd', 'KneeRot', 'AnkleFlx', 'AnkleAdd', 'AnkleRot']
+MomVarName: ['HipFlxMom', 'HipAddMom', 'HipRotMom', 'KneeFlxMom', 'KneeAddMom', 'KneeRotMom', 'AnkleFlxMom', 'AnkleAddMom', 'AnkleRotMom']
+GrfVarName: ['GRFF_X', 'GRFF_Y', 'GRFF_Z', 'Cop_X', 'Cop_Y', 'Cop_Z', 'Torque_X', 'Torque_Y', 'Torque_Z']
+GMax idx = 7 | VM idx = 5
+  Task: Walking
+  Foot: RX
+  EMG: (8, 821)
+  Ang: (12, 101)
+  Mom: (9, 101)
+  Grf: (9, 378)
+  Marker: (87, 165)
+  TimeStampKin: 3.59
+  TimeStampGrf: 3.59
+  TimeStampEmg: 3.59
+  cadence: 146.341463
+  -> .Ang/.Mom are %stride (101 cols); .EMG/.Grf are raw samples at their own rates
+
+=== Survey ===
+Level-walking trials: 844 
+Foot: Counter({'RX': 581, 'LX': 263})
+Rate configs (Kin, Grf, EMG) -> #subjects: {(200, 800, 1000): 12, (200, 800, 800): 13, (60, 960, 960): 25}
+EMG rates per walking trial: Counter({960.0: 324, 800.0: 273, 1000.0: 247})
+Distinct EMG channel orders: 1
+EMGSide != RX: {18: 'NO'}
+Rate flags: ['S12_D016: cadence-derived EMG rate 785.2 vs nominal 800', 'S35_D000: cadence-derived EMG rate 931.3 vs nominal 960']
+Stride duration (s): min 0.683 median 1.078 max 2.945
+
+All 844 walking trials aligned OK. First grid %: 6–22 (median 14); last grid %: 97–100; T: 77–94 (median 85)
+
+=== Saved triplets ===
+S02_D001 foot=RX rate=800Hz N=709 stride=0.885s windows=30 -> X(82, 4) Y(82, 2) grid 17–98%
+S03_D000 foot=RX rate=960Hz N=945 stride=0.983s windows=34 -> X(84, 4) Y(84, 2) grid 16–99%
+S01_D000 foot=RX rate=1000Hz N=921 stride=0.920s windows=31 -> X(81, 4) Y(81, 2) grid 17–97%
+S41_D001 foot=RX rate=960Hz N=673 stride=0.700s windows=23 -> X(78, 4) Y(78, 2) grid 22–99%
+S08_D018 foot=RX rate=1000Hz N=2946 stride=2.945s windows=112 -> X(94, 4) Y(94, 2) grid 6–99%
+
+Plots written to /Users/burag/Library/CloudStorage/GoogleDrive-burakemeryan2003@gmail.com/Diğer bilgisayarlar/Dizüstü Bilgisayarım/MEF/BOUN/Thesis/S-EMG Datasets/outputs/gate1

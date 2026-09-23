@@ -1,0 +1,11 @@
+# Baştaki "/" önemli: sadece kökteki data/ klasörünü (veri seti) yok sayar.
+# Sabitlenmezse src/data/ de eşleşir ve çekirdek modüller commit dışı kalır.
+/data/
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Lencioni et al. (2019) veri setiyle birlikte gelen dosyalar (repoya dahil edilmiyor)
+/metadata/
+/matlab function/
