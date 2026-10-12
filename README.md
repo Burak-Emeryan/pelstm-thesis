@@ -50,11 +50,17 @@ data/                 .mat dosyaları (indirilecek, commit edilmiyor)
 src/data/             data_io.py (yükleme, kanal indeksi, rate türetme)
                       features.py (extract_features — saf NumPy, framework bağımsız)
                       align.py (native zaman ekseni → 101 noktalık %stride grid'i)
-src/models/           Hafta 3+ LSTM kodu (henüz boş)
+                      fullstride.py (wrap padding ile tam stride feature'ları — Hafta 3)
+                      dataset.py (844 trial'lık veri seti), splits.py (hız katmanlı bölmeler)
+src/models/           lstm_baseline.py (AnkleLSTM), train.py (eğitim döngüsü), metrics.py
 scripts/run_gate1.py  uçtan uca Gate 1 pipeline'ı
+scripts/              build_week3_dataset.py, check_week3_data.py, make_splits.py,
+                      train_baseline.py (uçtan uca Hafta 3 pipeline'ı)
 outputs/gate1/        plot'lar, kaydedilen tensörler (.npy), survey ve çalıştırma log'u
+outputs/week3/        veri seti + kontroller, bölmeler, koşu çıktıları, summary.md
 GATE1_SPEC.md         Gate 1 için verilen spec
 GATE1_LOG.md          teknik kararlar (Bölüm A) + kullanıcının dolduracağı sorular (Bölüm B)
+WEEK3_LOG.md          Hafta 3 teknik kararları + kullanıcının dolduracağı sorular
 ```
 
 ## Gate 1 durumu
@@ -68,3 +74,20 @@ incelendi. Spec ile gerçek verinin uyuşmadığı noktalar ve Hafta 3 öncesi k
 EMG'nin tek stride'a kırpılmış olması, taraf eşleşmesi, DC offset, örnekleme hızına bağlı özellik
 ölçeği — [GATE1_LOG.md](GATE1_LOG.md) Bölüm A'da işaretli. Hafta 3+ (train/val split, LSTM,
 physics-loss) bu repoda henüz yok.
+
+## Hafta 3
+
+Hız aralığına göre katmanlı train/val bölmesi, ayak bileği pozisyonu ve momenti için **iki ayrı**
+LSTM (200 / 50 gizli birim) ve uçtan uca eğitim script'i. Özellikler artık stride'ın 101 noktasının
+tamamında üretiliyor (periyodik wrap padding); hedeflere yine dokunulmuyor.
+
+Her şeyi tek komutla çalıştır (veri seti → kontroller → bölmeler → smoke testi → A, B, C koşuları → özet):
+
+```bash
+.venv/bin/python scripts/train_baseline.py --run all
+```
+
+Çıktılar `outputs/week3/` altında: `data/` (veri seti + C1–C7 kontrol raporu), `splits/` (hız binleri
+ve A/B/C bölmeleri), `runs/` (koşu başına config, scaler, loss log, metrikler, figürler),
+`summary.md` ve `MANIFEST.json`. Klasörlerin ayrıntısı: [outputs/week3/README.md](outputs/week3/README.md).
+Teknik kararlar, sapmalar ve sonuç tabloları: [WEEK3_LOG.md](WEEK3_LOG.md).
