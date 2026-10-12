@@ -9,3 +9,10 @@ __pycache__/
 # Lencioni et al. (2019) veri setiyle birlikte gelen dosyalar (repoya dahil edilmiyor)
 /metadata/
 /matlab function/
+
+# Hafta 3: büyük ara çıktılar (yeniden üretilebilir)
+outputs/week3/data/*.npz
+outputs/week3/runs/**/*.pt
+
+# IDE
+.idea/
